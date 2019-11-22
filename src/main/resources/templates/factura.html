@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout/layout::head"></head>
+<body>
+	<header th:replace="layout/layout::header"></header>
+	<div class="container py-4">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				<form th:action="@{/factura}" th:object="${cliente}" method="post">
+					<table class="table table-bordered">
+					    <a th:href="@{/listar/}" th:text="'*volver'"></a>
+				
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">Cliente</label>
+							<div class="col-sm-6">
+							    <input type="text" th:field="*{nombre}" class="form-control"/>
+						    </div>
+						</div>
+
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">Descripcion</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control"/>							
+							</div>
+						</div>
+						
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">Observacion</label>
+							<div class="col-sm-6">
+							<input type="text" class="form-control"/>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">Buscar producto</label>
+							<div class="col-sm-6">
+							<input type="text" class="form-control"/>
+							</div>
+						</div>
+
+					</table>
+
+				</form>
+					<table class="table table-striped">
+					<thead>
+					    <tr>
+					        <th class="bg-light table-bordered">nombre</th>
+							<th class="bg-light table-bordered">precio</th>
+							<th class="bg-light table-bordered">cantidad</th>
+							<th class="bg-light  table-bordered">total</th>
+							<th class="bg-light  table-bordered">borrar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="cliente: ${clientes}">
+							<td class="btn btn-dark btn-xs" th:text="${cliente.id}"></td>
+							<td th:text=""></td>
+							<td th:text="${cliente.apellido}"></td>
+							<td th:text="${cliente.email}"></td>
+							<td th:text="${cliente.createAt}"></td>
+							<td><a class="btn btn-success btn-xs"
+								th:href="@{/factura/}+${cliente.id}" th:text="'crear factura'"></a></td>
+							<td><a class="btn btn-primary btn-m"
+								th:href="@{/form/} + ${cliente.id}" th:text="'editar'"></a></td>
+						</tr>
+					</tbody>
+					</table>
+					<input type="submit" value="Crear Factura" class="btn btn-secondary" />
+				
+</body>
+</div>
+</div>
+
+</html>
